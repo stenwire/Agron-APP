@@ -108,7 +108,7 @@ def contact():
 # http://127.0.0.1:5000/farmer
 def farmer():
     farmers = Farmer.query.all()
-    return render_template('farmer_home.html', farmers=farmers)
+    return render_template('./pages/farmer_home.html', farmers=farmers)
 
 
 # ...
@@ -131,20 +131,20 @@ def create_farmer():
         lastname = request.form['lastname']
         email = request.form['email']
         age = int(request.form['age'])
-        bio = request.form['bio']
+        contact = request.form['contact']
         details = request.form['details']
         image_link = request.form['image_link']
         farmer = Farmer(firstname=firstname,
                           lastname=lastname,
                           email=email,
                           age=age,
-                          bio=bio,
+                          contact=contact,
                           details=details,
                           image_link=image_link)
         db.session.add(farmer)
         db.session.commit()
 
-        return redirect(url_for('get_farmer'))
+        return redirect(url_for('get_farmer'), farmer_id=farmer.id)
 
     return render_template('./forms/create_farmer.html')
 
@@ -173,7 +173,8 @@ def edit_farmer(farmer_id):
         db.session.add(farmer)
         db.session.commit()
 
-        return redirect(url_for('get_farmer'))
+        farmer_ = Farmer.query.get_or_404(farmer.id)
+        return render_template('farmer.html', farmer=farmer)
 
     return render_template('./forms/edit_farmer.html', farmer=farmer)
 
