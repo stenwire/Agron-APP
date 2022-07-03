@@ -80,35 +80,35 @@ class Product(db.Model):
 
 # ... home route
 
-@app.route('/')
+@app.route('/about')
 # http://127.0.0.1:5000
 def index():
-    return render_template('create.html')
+    return render_template('index.html')
 
 @app.route('/about')
 # http://127.0.0.1:5000
 def about():
-    return render_template('index.html')
+    return render_template('about.html')
 
 @app.route('/service')
 # http://127.0.0.1:5000
 def service():
-    return render_template('index.html')
+    return render_template('service.html')
 
 @app.route('/contact')
 # http://127.0.0.1:5000
 def contact():
-    return render_template('index.html')
+    return render_template('contact.html')
 
 # -------------------------------------------
 #   FARMERS
 # --------------------------------------------
 
-# @app.route('/farmer')
-# # http://127.0.0.1:5000/farmer
-# def farmer():
-#     farmers = Farmer.query.all()
-#     return render_template('index.html', farmers=farmers)
+@app.route('/farmer')
+# http://127.0.0.1:5000/farmer
+def farmer():
+    farmers = Farmer.query.all()
+    return render_template('farmer_home.html', farmers=farmers)
 
 
 # ...

@@ -83,7 +83,22 @@ class Product(db.Model):
 @app.route('/')
 # http://127.0.0.1:5000
 def index():
-    return render_template('index.html')
+    return render_template('./pages/index.html')
+
+@app.route('/about')
+# http://127.0.0.1:5000
+def about():
+    return render_template('./pages/about.html')
+
+@app.route('/service')
+# http://127.0.0.1:5000
+def service():
+    return render_template('./pages/service.html')
+
+@app.route('/contact')
+# http://127.0.0.1:5000
+def contact():
+    return render_template('./pages/contact.html')
 
 # -------------------------------------------
 #   FARMERS
@@ -93,7 +108,7 @@ def index():
 # http://127.0.0.1:5000/farmer
 def farmer():
     farmers = Farmer.query.all()
-    return render_template('index.html', farmers=farmers)
+    return render_template('farmer_home.html', farmers=farmers)
 
 
 # ...
@@ -131,7 +146,7 @@ def create_farmer():
 
         return redirect(url_for('get_farmer'))
 
-    return render_template('create_farmer.html')
+    return render_template('./forms/create_farmer.html')
 
 
 # ...
@@ -160,7 +175,7 @@ def edit_farmer(farmer_id):
 
         return redirect(url_for('get_farmer'))
 
-    return render_template('edit_farmer.html', farmer=farmer)
+    return render_template('./forms/edit_farmer.html', farmer=farmer)
 
 
 # ...
@@ -216,7 +231,7 @@ def create_investor():
 
         return redirect(url_for('get_investor'))
 
-    return render_template('create_investor.html')
+    return render_template('./forms/create_investor.html')
 
 @app.route('/investor/<int:investor_id>/edit/', methods=('GET', 'POST'))
 # http://127.0.0.1:5000/investor/2/edit/
@@ -236,12 +251,12 @@ def edit_investor(investor_id):
         investor.age = age
         investor.bio = bio
 
-        db.session.add(farmer)
+        db.session.add(investor)
         db.session.commit()
 
         return redirect(url_for('get_investor'))
 
-    return render_template('edit_investor.html', farmer=farmer)
+    return render_template('./forms/edit_investor.html', investor=investor)
 
 
 @app.post('/investor/<int:investor_id>/delete/')
@@ -287,7 +302,7 @@ def create_trader():
 
         return redirect(url_for('get_trader'))
 
-    return render_template('create_trader.html')
+    return render_template('./forms/create_trader.html')
 
 
 @app.route('/trader/<int:trader_id>/edit/', methods=('GET', 'POST'))
@@ -308,12 +323,12 @@ def edit_trader(investor_id):
         trader.age = age
         trader.bio = bio
 
-        db.session.add(farmer)
+        db.session.add(trader)
         db.session.commit()
 
         return redirect(url_for('get_trader'))
 
-    return render_template('edit_trader.html', farmer=farmer)
+    return render_template('./forms/edit_trader.html', farmer=trader)
 
 
 @app.post('/trader/<int:trader_id>/delete/')
@@ -362,7 +377,7 @@ def add_product():
 
         return redirect(url_for('shop'))
 
-    return render_template('create_product.html')
+    return render_template('./forms/create_product.html')
 
 
 @app.route('/product/<int:product_id>/edit/', methods=('GET', 'POST'))
@@ -390,7 +405,7 @@ def edit_product(product_id):
 
         return redirect(url_for('get_product'))
 
-    return render_template('edit_product.html', product=product)
+    return render_template('./forms/edit_product.html', product=product)
 
 
 @app.post('/product/<int:product_id>/delete/')
