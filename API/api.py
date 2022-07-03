@@ -89,11 +89,11 @@ def index():
 #   FARMERS
 # --------------------------------------------
 
-@app.route('/farmer')
-# http://127.0.0.1:5000/farmer
-def farmer():
-    farmers = Farmer.query.all()
-    return render_template('index.html', farmers=farmers)
+# @app.route('/farmer')
+# # http://127.0.0.1:5000/farmer
+# def farmer():
+#     farmers = Farmer.query.all()
+#     return render_template('index.html', farmers=farmers)
 
 
 # ...

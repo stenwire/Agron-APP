@@ -10,7 +10,6 @@ DEBUG = True
 
 
 # TODO IMPLEMENT DATABASE URL - done
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:despicable01@localhost:5432/musicapp'
 
 SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:despicable01@localhost:5432/genzapp'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
