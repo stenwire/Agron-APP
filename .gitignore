@@ -2,8 +2,6 @@ venv/
 .vscode/
 __pycache__/
 test.db
-templates/
-static/
 
 # OS generated files #
 ######################
