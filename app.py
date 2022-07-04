@@ -103,10 +103,10 @@ import re
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
-DB_HOST = "localhost"
-DB_NAME = "genzapp"
-DB_USER = "postgres"
-DB_PASS = "despicable01"
+DB_HOST = "ec2-44-205-41-76.compute-1.amazonaws.com"
+DB_NAME = "d3c1ph7oj62k6e"
+DB_USER = "vyzbwuexwsgoyb"
+DB_PASS = "d02c39d997a30e5d8cc5884ebf6fbdb240cf1549e59352f3f0642add46bc0173"
 
 # connection = psycopg2.connect(database='example', user='postgres', password='despicable01')
 conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
