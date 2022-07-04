@@ -25,6 +25,7 @@ class Users(db.Model):
     username = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(500), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
+# -----------------newly created-----------------------------------------#
 
     def __repr__(self):
         return f'<Farmer {self.fullname}>'
@@ -191,7 +192,7 @@ def logout():
    session.pop('id', None)
    session.pop('username', None)
    # Redirect to login page
-   return redirect(url_for('login'))
+   return redirect(url_for('index'))
 
 
 
@@ -199,35 +200,6 @@ def logout():
 
 
 # ------------ AUTHENTICATION END ---------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # ... home route
@@ -278,27 +250,30 @@ def get_farmer(farmer_id):
 @app.route('/farmer/create/', methods=('GET', 'POST'))
 # http://127.0.0.1:5000/farmer/create/
 def create_farmer():
-    if request.method == 'POST':
-        firstname = request.form['firstname']
-        lastname = request.form['lastname']
-        email = request.form['email']
-        age = int(request.form['age'])
-        contact = request.form['contact']
-        details = request.form['details']
-        image_link = request.form['image_link']
-        farmer = Farmer(firstname=firstname,
-                          lastname=lastname,
-                          email=email,
-                          age=age,
-                          contact=contact,
-                          details=details,
-                          image_link=image_link)
-        db.session.add(farmer)
-        db.session.commit()
+    if 'loggedin' in session:
+        if request.method == 'POST':
+            firstname = request.form['firstname']
+            lastname = request.form['lastname']
+            email = request.form['email']
+            age = int(request.form['age'])
+            contact = request.form['contact']
+            details = request.form['details']
+            image_link = request.form['image_link']
+            farmer = Farmer(firstname=firstname,
+                            lastname=lastname,
+                            email=email,
+                            age=age,
+                            contact=contact,
+                            details=details,
+                            image_link=image_link)
+            db.session.add(farmer)
+            db.session.commit()
 
-        return redirect(url_for('get_farmer'), farmer_id=farmer.id)
+            return redirect(url_for('get_farmer'), farmer_id=farmer.id)
 
-    return render_template('./forms/create_farmer.html')
+        return render_template('./forms/create_farmer.html')
+    
+    return redirect(url_for('login'))
 
 
 # ...
@@ -364,27 +339,30 @@ def get_stock():
 @app.route('/investor/create/', methods=('GET', 'POST'))
 # http://127.0.0.1:5000/investor/create/
 def create_investor():
-    if request.method == 'POST':
-        firstname = request.form['firstname']
-        lastname = request.form['lastname']
-        email = request.form['email']
-        age = int(request.form['age'])
-        bio = request.form['bio']
-        details = request.form['details']
-        image_link = request.form['image_link']
-        farmer = Farmer(firstname=firstname,
-                          lastname=lastname,
-                          email=email,
-                          age=age,
-                          bio=bio,
-                          details=details,
-                          image_link=image_link)
-        db.session.add(farmer)
-        db.session.commit()
+    if 'loggedin' in session:
+        if request.method == 'POST':
+            firstname = request.form['firstname']
+            lastname = request.form['lastname']
+            email = request.form['email']
+            age = int(request.form['age'])
+            bio = request.form['bio']
+            details = request.form['details']
+            image_link = request.form['image_link']
+            farmer = Farmer(firstname=firstname,
+                            lastname=lastname,
+                            email=email,
+                            age=age,
+                            bio=bio,
+                            details=details,
+                            image_link=image_link)
+            db.session.add(farmer)
+            db.session.commit()
 
-        return redirect(url_for('get_investor'))
+            return redirect(url_for('get_investor'))
 
-    return render_template('./forms/create_investor.html')
+        return render_template('./forms/create_investor.html')
+
+    return redirect(url_for('login'))
 
 @app.route('/investor/<int:investor_id>/edit/', methods=('GET', 'POST'))
 # http://127.0.0.1:5000/investor/2/edit/
@@ -435,27 +413,30 @@ def get_trader(trader_id):
 @app.route('/trader/create/', methods=('GET', 'POST'))
 # http://127.0.0.1:5000/trader/create/
 def create_trader():
-    if request.method == 'POST':
-        firstname = request.form['firstname']
-        lastname = request.form['lastname']
-        email = request.form['email']
-        age = int(request.form['age'])
-        bio = request.form['bio']
-        details = request.form['details']
-        image_link = request.form['image_link']
-        trader = Trader(firstname=firstname,
-                          lastname=lastname,
-                          email=email,
-                          age=age,
-                          bio=bio,
-                          details=details,
-                          image_link=image_link)
-        db.session.add(trader)
-        db.session.commit()
+    if 'loggedin' in session:
+        if request.method == 'POST':
+            firstname = request.form['firstname']
+            lastname = request.form['lastname']
+            email = request.form['email']
+            age = int(request.form['age'])
+            bio = request.form['bio']
+            details = request.form['details']
+            image_link = request.form['image_link']
+            trader = Trader(firstname=firstname,
+                            lastname=lastname,
+                            email=email,
+                            age=age,
+                            bio=bio,
+                            details=details,
+                            image_link=image_link)
+            db.session.add(trader)
+            db.session.commit()
 
-        return redirect(url_for('get_trader'))
+            return redirect(url_for('get_trader'))
 
-    return render_template('./forms/create_trader.html')
+        return render_template('./forms/create_trader.html')
+
+    return redirect(url_for('login'))
 
 
 @app.route('/trader/<int:trader_id>/edit/', methods=('GET', 'POST'))

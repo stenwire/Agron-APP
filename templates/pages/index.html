@@ -60,12 +60,20 @@
             </div>
             <div id="myNav" class="overlay">
               <div class="overlay-content">
+                {% if 'loggedin' in session %}
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="{{ url_for('service') }}">Service</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+                <a href="{{ url_for('logout') }}">logout</a>
+                {% else %}
                 <a href="{{ url_for('index') }}">Home</a>
                 <a href="{{ url_for('about') }}">About</a>
                 <a href="{{ url_for('service') }}">Service</a>
                 <a href="{{ url_for('contact') }}">Contact</a>
                 <a href="{{ url_for('login') }}">Login</a>
                 <a href="{{ url_for('register') }}">SignUp</a>
+                {% endif %}
               </div>
             </div>
           </div>
