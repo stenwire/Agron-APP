@@ -60,10 +60,22 @@
             </div>
             <div id="myNav" class="overlay">
               <div class="overlay-content">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="service.html">Service</a>
-                <a href="contact.html">Contact</a>
+                {% if 'loggedin' in session %}
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="{{ url_for('service') }}">Service</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+                <a href="{{ url_for('logout') }}">logout</a>
+                <a href="{{ url_for('shop') }}">Shop</a>
+                {% else %}
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="{{ url_for('service') }}">Service</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('register') }}">SignUp</a>
+                <a href="{{ url_for('shop') }}">Shop</a>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -80,7 +92,7 @@
             <div class="detail-box">
               <h1>
                 Welcome to <br>
-                Our Farm
+                Agron
               </h1>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque rem veritatis dolorem voluptas dolore odio pariatur explicabo nesciunt non et obcaecati repellat est sint aliquid, temporibus ab ad eum nisi.
@@ -94,7 +106,7 @@
           </div>
           <div class="col-md-6 ">
             <div class="img-box">
-              <img src="images/slider-img.png" alt="" />
+              <img src="{{ url_for('static', filename='images/slider-img.png') }}" alt="" />
             </div>
           </div>
         </div>
@@ -110,7 +122,7 @@
       <div class="row">
         <div class="col-md-3">
           <div class="img-box">
-            <img src="images/about-img.png" alt="" />
+            <img src="{{ url_for('static', filename='images/about-img.png') }}" alt="" />
           </div>
         </div>
         <div class="col-md-9">
@@ -177,7 +189,7 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Fresh Vegetables
+                  SignUp as a Farmer
                 </h5>
                 <p>
                   Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
@@ -185,8 +197,8 @@
               </div>
             </div>
             <div class="btn-box">
-              <a href="">
-                Read More
+              <a href="{{ url_for('create_farmer') }}">
+                Join Now
               </a>
             </div>
           </div>
@@ -201,7 +213,7 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Organic Produts
+                  SignUp as a Trader
                 </h5>
                 <p>
                   Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
@@ -209,8 +221,8 @@
               </div>
             </div>
             <div class="btn-box">
-              <a href="">
-                Read More
+              <a href="{{ url_for('create_trader') }}">
+                Join Now
               </a>
             </div>
           </div>
@@ -241,7 +253,7 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Dairy Products
+                  Become an Investor
                 </h5>
                 <p>
                   Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
@@ -249,8 +261,8 @@
               </div>
             </div>
             <div class="btn-box">
-              <a href="">
-                Read More
+              <a href="{{ url_for('create_investor') }}">
+                Join Now
               </a>
             </div>
           </div>
@@ -277,18 +289,18 @@
               It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like
             </p>
             <div class="btn-box">
-              <a href="" class="btn-1">
+              <a href="{{ url_for('contact') }}" class="btn-1">
                 Contact Us
               </a>
               <a href="" class="btn-2">
-                Read More
+                Shop Our Products
               </a>
             </div>
           </div>
         </div>
         <div class="col-md-4">
           <div class="img-box">
-            <img src="images/fresh-img.png" alt="" />
+            <img src="{{ url_for('static', filename='images/fresh-img.png') }}" alt="" />
           </div>
         </div>
       </div>
@@ -310,7 +322,7 @@
           <div class="item">
             <div class="box">
               <div class="img-box">
-                <img src="images/c1.jpg" alt="">
+                <img src="{{ url_for('static', filename='images/c1.jpg') }}" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -329,7 +341,7 @@
           <div class="item">
             <div class="box">
               <div class="img-box">
-                <img src="images/c2.jpg" alt="">
+                <img src="{{ url_for('static', filename='images/c1.jpg') }}" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -348,7 +360,7 @@
           <div class="item">
             <div class="box">
               <div class="img-box">
-                <img src="images/c3.jpg" alt="">
+                <img src="{{ url_for('static', filename='images/c1.jpg') }}" alt="">
               </div>
               <div class="detail-box">
                 <h5>
@@ -552,17 +564,17 @@
   <footer class="container-fluid footer_section ">
     <p>
       &copy; <span id="displayDate"></span> All Rights Reserved. Design by
-      <a href="https://html.design/">Free Html Templates</a>
+      <a href="https://github.com/stenwire/Agron-APP">Agron Team</a>
     </p>
   </footer>
   <!-- end  footer section -->
 
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/bootstrap.js"></script>
+  <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
   <!-- End Google Map -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
   </script>
-  <script src="js/custom.js"></script>
+  <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
   <!-- Google Map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
 

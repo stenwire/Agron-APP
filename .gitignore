@@ -2,7 +2,11 @@ venv/
 .vscode/
 __pycache__/
 test.db
-
+.env
+sten.py
+old_requirements.txt
+new.txt
+test_auth/
 # OS generated files #
 ######################
 .DS_Store

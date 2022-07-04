@@ -80,20 +80,35 @@ class Product(db.Model):
 
 # ... home route
 
-@app.route('/')
+@app.route('/about')
 # http://127.0.0.1:5000
 def index():
     return render_template('index.html')
+
+@app.route('/about')
+# http://127.0.0.1:5000
+def about():
+    return render_template('about.html')
+
+@app.route('/service')
+# http://127.0.0.1:5000
+def service():
+    return render_template('service.html')
+
+@app.route('/contact')
+# http://127.0.0.1:5000
+def contact():
+    return render_template('contact.html')
 
 # -------------------------------------------
 #   FARMERS
 # --------------------------------------------
 
-# @app.route('/farmer')
-# # http://127.0.0.1:5000/farmer
-# def farmer():
-#     farmers = Farmer.query.all()
-#     return render_template('index.html', farmers=farmers)
+@app.route('/farmer')
+# http://127.0.0.1:5000/farmer
+def farmer():
+    farmers = Farmer.query.all()
+    return render_template('farmer_home.html', farmers=farmers)
 
 
 # ...
@@ -236,12 +251,12 @@ def edit_investor(investor_id):
         investor.age = age
         investor.bio = bio
 
-        db.session.add(farmer)
+        db.session.add(investor)
         db.session.commit()
 
         return redirect(url_for('get_investor'))
 
-    return render_template('edit_investor.html', farmer=farmer)
+    return render_template('edit_investor.html', investor=investor)
 
 
 @app.post('/investor/<int:investor_id>/delete/')
@@ -308,12 +323,12 @@ def edit_trader(investor_id):
         trader.age = age
         trader.bio = bio
 
-        db.session.add(farmer)
+        db.session.add(trader)
         db.session.commit()
 
         return redirect(url_for('get_trader'))
 
-    return render_template('edit_trader.html', farmer=farmer)
+    return render_template('edit_trader.html', farmer=trader)
 
 
 @app.post('/trader/<int:trader_id>/delete/')
