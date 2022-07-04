@@ -10,6 +10,6 @@ DEBUG = True
 
 
 # TODO IMPLEMENT DATABASE URL - done
-SQLALCHEMY_DATABASE_URI = 'postgres://zqlpsfkclvlbrx:3222e0ffd847d08da74e5bc23be4370ad5892174dc8aa4573c00938271d0345c@ec2-23-23-151-191.compute-1.amazonaws.com:5432/d8hgqv66uofo5a'
+SQLALCHEMY_DATABASE_URI = 'postgres://vyzbwuexwsgoyb:d02c39d997a30e5d8cc5884ebf6fbdb240cf1549e59352f3f0642add46bc0173@ec2-44-205-41-76.compute-1.amazonaws.com:5432/d3c1ph7oj62k6e'
 # SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:despicable01@localhost:5432/genzapp'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
