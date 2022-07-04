@@ -12,12 +12,20 @@ from jose import jwt
 from urllib.request import urlopen
 from os import environ as env
 from urllib.parse import quote_plus, urlencode
+# ---------------
+from flask_session import Session 
+# -----------------
 
 app = Flask(__name__)
 # moment = Moment(app)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 # migrate = Migrate(app, db)
+#---------------
+app.config["SESSION_PERMANENT"] = True
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
+# -----------------
 
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
