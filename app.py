@@ -1,16 +1,33 @@
-from itertools import product
+# from itertools import product
 import os
-from flask import Flask, render_template, request, url_for, redirect, abort
+from flask import Flask, flash, render_template, request, session, url_for, redirect, abort
 from flask_sqlalchemy import SQLAlchemy
 # from flask_moment import Moment
 from sqlalchemy.sql import func
-from flask_migrate import Migrate
+# from flask_migrate import Migrate
+from dotenv import find_dotenv, load_dotenv
+import json
+from functools import wraps
+from jose import jwt
+from urllib.request import urlopen
+from os import environ as env
+from urllib.parse import quote_plus, urlencode
 
 app = Flask(__name__)
 # moment = Moment(app)
 app.config.from_object('config')
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+# migrate = Migrate(app, db)
+
+class Users(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    fullname = db.Column(db.String(100), nullable=False)
+    username = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.String(500), unique=True, nullable=False)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+
+    def __repr__(self):
+        return f'<Farmer {self.fullname}>'
 
 class Farmer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -76,6 +93,141 @@ class Product(db.Model):
 
     def __repr__(self):
         return f'<Trader {self.name}>'
+
+
+# ------------ AUTHENTICATION END ---------------------------
+import psycopg2 #pip install psycopg2 
+import psycopg2.extras
+import re 
+from werkzeug.security import generate_password_hash, check_password_hash
+
+
+DB_HOST = "localhost"
+DB_NAME = "genzapp"
+DB_USER = "postgres"
+DB_PASS = "despicable01"
+
+# connection = psycopg2.connect(database='example', user='postgres', password='despicable01')
+conn = psycopg2.connect(dbname=DB_NAME, user=DB_USER, password=DB_PASS, host=DB_HOST)
+
+@app.route('/login/', methods=['GET', 'POST'])
+def login():
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+   
+    # Check if "username" and "password" POST requests exist (user submitted form)
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+        print(password)
+ 
+        # Check if account exists using MySQL
+        cursor.execute('SELECT * FROM users WHERE username = %s', (username,))
+        # Fetch one record and return result
+        account = cursor.fetchone()
+ 
+        if account:
+            password_rs = account['password']
+            print(password_rs)
+            # If account exists in users table in out database
+            if check_password_hash(password_rs, password):
+                # Create session data, we can access this data in other routes
+                session['loggedin'] = True
+                session['id'] = account['id']
+                session['username'] = account['username']
+                # Redirect to home page
+                return redirect(url_for('index'))
+            else:
+                # Account doesnt exist or username/password incorrect
+                flash('Incorrect username/password')
+        else:
+            # Account doesnt exist or username/password incorrect
+            flash('Incorrect username/password')
+ 
+    return render_template('./forms/login.html')
+  
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+ 
+    # Check if "username", "password" and "email" POST requests exist (user submitted form)
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form:
+        # Create variables for easy access
+        fullname = request.form['fullname']
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
+    
+        _hashed_password = generate_password_hash(password)
+ 
+        #Check if account exists using MySQL
+        cursor.execute('SELECT * FROM users WHERE username = %s', (username,))
+        account = cursor.fetchone()
+        print(account)
+        # If account exists show error and validation checks
+        if account:
+            flash('Account already exists!')
+        elif not re.match(r'[^@]+@[^@]+\.[^@]+', email):
+            flash('Invalid email address!')
+        elif not re.match(r'[A-Za-z0-9]+', username):
+            flash('Username must contain only characters and numbers!')
+        elif not username or not password or not email:
+            flash('Please fill out the form!')
+        else:
+            # Account doesnt exists and the form data is valid, now insert new account into users table
+            cursor.execute("INSERT INTO users (fullname, username, password, email) VALUES (%s,%s,%s,%s)", (fullname, username, _hashed_password, email))
+            conn.commit()
+            flash('You have successfully registered!')
+    elif request.method == 'POST':
+        # Form is empty... (no POST data)
+        flash('Please fill out the form!')
+    # Show registration form with message (if any)
+    return render_template('./forms/register.html')
+   
+   
+@app.route('/logout')
+def logout():
+    # Remove session data, this will log the user out
+   session.pop('loggedin', None)
+   session.pop('id', None)
+   session.pop('username', None)
+   # Redirect to login page
+   return redirect(url_for('login'))
+
+
+
+
+
+
+# ------------ AUTHENTICATION END ---------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # ... home route
