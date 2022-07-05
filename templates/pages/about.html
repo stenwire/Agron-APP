@@ -15,16 +15,35 @@
 
   <title>Norrig</title>
 
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-  <!-- slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+ <!-- Basic -->
+ <meta charset="utf-8" />
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+ <!-- Mobile Metas -->
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+ <!-- Site Metas -->
+ <meta name="keywords" content="" />
+ <meta name="description" content="" />
+ <meta name="author" content="" />
+ <!-- <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon"> -->
+ <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+
+ <title>Agron</title>
+
+ <!-- bootstrap core css -->
+ <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> -->
+ <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+ <!-- slider stylesheet -->
+ <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+ <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}"> -->
 
 
-  <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+ <!-- Custom styles for this template -->
+ <!-- <link href="css/style.css" rel="stylesheet" /> -->
+ <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+ <!-- responsive style -->
+ <!-- <link href="css/responsive.css" rel="stylesheet" /> -->
+ <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
+</head>
 </head>
 
 <body class="sub_page">
