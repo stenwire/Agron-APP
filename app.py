@@ -104,7 +104,7 @@ class Product(db.Model):
         return f'<Trader {self.name}>'
 
 
-# ------------ AUTHENTICATION END ---------------------------
+# ------------ AUTHENTICATION END -----------=-----------------
 import psycopg2 #pip install psycopg2 
 import psycopg2.extras
 import re 
