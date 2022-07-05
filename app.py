@@ -489,7 +489,7 @@ def delete_trader(investor_id):
 @app.route('/shop')
 def shop():
     product = Product.query.all()
-    return render_template('shop.html', products=product)
+    return render_template('./products/shop.html', products=product)
 
 
 @app.route('/product/<int:product_id>/')

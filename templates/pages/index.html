@@ -98,7 +98,7 @@
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque rem veritatis dolorem voluptas dolore odio pariatur explicabo nesciunt non et obcaecati repellat est sint aliquid, temporibus ab ad eum nisi.
               </p>
               <div class="btn-box">
-                <a href="" class="btn-1">
+                <a href="{{ url_for('about') }}" class="btn-1">
                   Read More
                 </a>
               </div>
@@ -141,10 +141,10 @@
               Quidem, recusandae quasi.
             </p>
             <div class="btn-box">
-              <a href="" class="btn-1">
+              <a href="{{url_for('contact')}}" class="btn-1">
                 Contact Us
               </a>
-              <a href="" class="btn-2">
+              <a href="{{url_for('about')}}" class="btn-2">
                 Read More
               </a>
             </div>
@@ -292,7 +292,7 @@
               <a href="{{ url_for('contact') }}" class="btn-1">
                 Contact Us
               </a>
-              <a href="" class="btn-2">
+              <a href="{{ url_for('shop') }}" class="btn-2">
                 Shop Our Products
               </a>
             </div>

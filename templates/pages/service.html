@@ -11,9 +11,9 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}" type="image/x-icon">
 
-  <title>Norrig</title>
+  <title>Agron</title>
 
   <!-- Basic -->
   <meta charset="utf-8" />
@@ -52,9 +52,9 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container">
-          <a class="navbar-brand" href="index.html">
+          <a class="navbar-brand" href="{{url_for('index')}}">
             <span>
-              Norrig
+              Agron
             </span>
           </a>
           <div class="" id="">
@@ -74,10 +74,22 @@
             </div>
             <div id="myNav" class="overlay">
               <div class="overlay-content">
-                <a href="index.html">Home</a>
-                <a href="about.html">About</a>
-                <a href="service.html">Service</a>
-                <a href="contact.html">Contact</a>
+                {% if 'loggedin' in session %}
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="{{ url_for('service') }}">Service</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+                <a href="{{ url_for('logout') }}">logout</a>
+                <a href="{{ url_for('shop') }}">Shop</a>
+                {% else %}
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="{{ url_for('service') }}">Service</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('register') }}">SignUp</a>
+                <a href="{{ url_for('shop') }}">Shop</a>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -120,7 +132,7 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Fresh Vegetables
+                  SignUp as a Farmer
                 </h5>
                 <p>
                   Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
@@ -128,8 +140,8 @@
               </div>
             </div>
             <div class="btn-box">
-              <a href="">
-                Read More
+              <a href="{{ url_for('create_farmer') }}">
+                Join Now
               </a>
             </div>
           </div>
@@ -144,7 +156,7 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Organic Produts
+                  SignUp as a Trader
                 </h5>
                 <p>
                   Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
@@ -152,8 +164,8 @@
               </div>
             </div>
             <div class="btn-box">
-              <a href="">
-                Read More
+              <a href="{{ url_for('create_trader') }}">
+                Join Now
               </a>
             </div>
           </div>
@@ -184,7 +196,7 @@
               </div>
               <div class="detail-box">
                 <h5>
-                  Dairy Products
+                  Become an Investor
                 </h5>
                 <p>
                   Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
@@ -192,8 +204,8 @@
               </div>
             </div>
             <div class="btn-box">
-              <a href="">
-                Read More
+              <a href="{{ url_for('create_investor') }}">
+                Join Now
               </a>
             </div>
           </div>
@@ -338,17 +350,17 @@
   <footer class="container-fluid footer_section ">
     <p>
       &copy; <span id="displayDate"></span> All Rights Reserved. Design by
-      <a href="https://html.design/">Free Html Templates</a>
+      <a href="https://github.com/stenwire/Agron-APP">Agron Team</a>
     </p>
   </footer>
   <!-- end  footer section -->
 
-  <script src="js/jquery-3.4.1.min.js"></script>
-  <script src="js/bootstrap.js"></script>
+  <script src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
   <!-- End Google Map -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
   </script>
-  <script src="js/custom.js"></script>
+  <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
   <!-- Google Map -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
 
