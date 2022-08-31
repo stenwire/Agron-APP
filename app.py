@@ -13,7 +13,7 @@ from urllib.request import urlopen
 from os import environ as env
 from urllib.parse import quote_plus, urlencode
 # ---------------
-from flask_session import Session 
+from flask_session import Session
 # -----------------
 
 app = Flask(__name__)
