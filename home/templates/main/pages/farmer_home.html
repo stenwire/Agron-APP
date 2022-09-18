@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="title">{% block title %} Farmers {% endblock %}</h1>
+    <div class="content">
+        {% for farmer in farmers %}
+            <div class="student">
+                <p><b>#{{ farmer.id }}</b></p>
+                <b>
+                    <p class="name">
+                        <a href="{{ url_for('farmer', farmer_id=farmer.id)}}">
+                            {{ farmer.firstname }} {{ farmer.lastname }}
+                        </a>
+                    </p>
+                </b>
+                <!-- <img src="image.png" alt="Description for image" width="250" height="250"> -->
+                <!-- <image src="{{url_for('static',filename = 'images/image.png')}}" ></image> -->
+                <image src="{{ farmer.image_link }}" ></image>
+                <p>{{ farmer.email }}</p>
+                <p>{{ farmer.age }} years old.</p>
+                <p>Joined: {{ farmer.created_at }}</p>
+                <div class="bio">
+                    <h4>Contact</h4>
+                    <p>{{ farmer.contact }}</p>
+                </div>
+                <a href="{{ url_for('edit_farmer', farmer_id=farmer.id) }}">Edit</a>
+
+                <hr>
+                <form method="POST"
+                        action="{{ url_for('delete_farmer', farmer_id=farmer.id) }}">
+                    <input type="submit" value="Delete Farmer"
+                        onclick="return confirm('Are you sure you want to delete this entry?')">
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

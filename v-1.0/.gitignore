@@ -1,7 +1,6 @@
 venv/
-*.vscode/
-*__pycache__/
-.flaskenv
+.vscode/
+__pycache__/
 test.db
 .env
 old_requirements.txt
