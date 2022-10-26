@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from flask_mail import Mail, Message
 from random import randint
 from flask import Blueprint
-from ..extensions import create_app
+from ..extension import create_app
 
 app = create_app()
 
@@ -15,7 +15,7 @@ auth = Blueprint('auth', __name__, url_prefix='/auth', template_folder='./templa
 
 @auth.route('/signup')
 def index():
-    return render_template("verify.html")
+    return render_template("signup.html")
 
 @auth.route('/verify',methods = ["POST"])
 def verify():
