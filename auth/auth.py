@@ -2,26 +2,12 @@ from flask import Flask, render_template, request
 from flask_mail import Mail, Message
 from random import randint
 from flask import Blueprint
-
-# app = Flask(__name__)
-# from ..app import create_app
-
-# app = create_app()
 from ..extensions import create_app
 
 app = create_app()
 
 mail = Mail(app)
 
-# app.config["MAIL_SERVER"]='smtp.gmail.com'
-# app.config["MAIL_PORT"] = 465
-# app.config["MAIL_USERNAME"] = 'username@gmail.com'
-# app.config['MAIL_PASSWORD'] = '*************'
-# app.config['MAIL_USE_TLS'] = False
-# app.config['MAIL_USE_SSL'] = True
-
-
-# mail = Mail(app)
 otp = randint(000000,999999)
 
 auth = Blueprint('auth', __name__, url_prefix='/auth', template_folder='./templates')
@@ -31,12 +17,12 @@ auth = Blueprint('auth', __name__, url_prefix='/auth', template_folder='./templa
 def index():
     return render_template("home.html")
 
-@auth.route('/verify',methods = ["POST"])
+@auth.route('/verify')
 def verify():
-    email = request.form["email"]
-    msg = Message('OTP',sender = 'username@gmail.com', recipients = [email])
-    msg.body = str(otp)
-    mail.send(msg)
+    # email = request.form["email"]
+    # msg = Message('OTP',sender = 'username@gmail.com', recipients = [email])
+    # msg.body = str(otp)
+    # mail.send(msg)
     return render_template('verify.html')
 
 @auth.route('/validate',methods=["POST"])

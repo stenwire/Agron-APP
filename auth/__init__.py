@@ -13,9 +13,9 @@ otp = randint(000000,999999)
 auth = Blueprint('auth', __name__, url_prefix='/auth', template_folder='./templates')
 
 
-@auth.route('/login')
+@auth.route('/signup')
 def index():
-    return render_template("home.html")
+    return render_template("verify.html")
 
 @auth.route('/verify',methods = ["POST"])
 def verify():
